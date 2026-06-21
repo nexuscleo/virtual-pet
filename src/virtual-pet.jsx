@@ -328,13 +328,33 @@ export default function PetProgrammer({ username: propUsername }) {
     localStorage.setItem('programmer_pet_github_token', val);
   };
 
-  // Pet visual helper based on level
-  const getPetEmoji = (level) => {
-    if (level <= 2) return '🐣';
-    if (level <= 4) return '🐥';
-    if (level <= 6) return '🦆';
-    if (level <= 8) return '🦅';
-    return '🐉';
+  // Resolves PokeAPI Showdown animated GIF sprites
+  const getPetSprite = (level, xp) => {
+    const isShiny = xp > 1000;
+    const path = isShiny ? 'shiny/' : '';
+    
+    let pokemonId;
+    if (level <= 2) {
+      pokemonId = 172; // Pichu (Level 1-2)
+    } else if (level <= 4) {
+      pokemonId = 25;  // Pikachu (Level 3-4)
+    } else if (level <= 6) {
+      pokemonId = 26;  // Raichu (Level 5-6)
+    } else if (level <= 8) {
+      pokemonId = 149; // Dragonite (Level 7-8)
+    } else {
+      pokemonId = 384; // Rayquaza (Level 9-10)
+    }
+    
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${path}${pokemonId}.gif`;
+  };
+
+  const getPetName = (level) => {
+    if (level <= 2) return 'Pichu Programmer';
+    if (level <= 4) return 'Pikachu Developer';
+    if (level <= 6) return 'Raichu Architect';
+    if (level <= 8) return 'Dragonite Tech Lead';
+    return 'Rayquaza CTO';
   };
 
   const formatCountdown = (seconds) => {
@@ -478,7 +498,14 @@ export default function PetProgrammer({ username: propUsername }) {
       {/* Content Area */}
       {loading && !petData ? (
         <div className="glass-card" style={{ padding: '40px 20px', textAlign: 'center' }}>
-          <div style={{ fontSize: '40px', display: 'inline-block' }} className="pet-container level-up-animate">🥚</div>
+          <div className="pet-container">
+            <img 
+              className="pet-sprite" 
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/egg.png" 
+              alt="Ovo do Pet" 
+            />
+            <div className="pet-shadow" style={{ width: '40px' }}></div>
+          </div>
           <h3 style={{ margin: '15px 0 5px' }}>Conectando ao GitHub...</h3>
           <p style={{ color: 'var(--text-secondary)' }}>Buscando informações e gerando seu pet...</p>
         </div>
@@ -504,13 +531,18 @@ export default function PetProgrammer({ username: propUsername }) {
             <>
               {/* Pet Display Card */}
               <div className="glass-card" style={{ position: 'relative' }}>
-                <div className={`pet-container ${levelUpAnimate ? 'level-up-animate' : ''}`}>
-                  {getPetEmoji(petData.petLevel)}
+                <div className="pet-container">
+                  <img 
+                    className={`pet-sprite ${levelUpAnimate ? 'level-up-animate' : ''}`} 
+                    src={getPetSprite(petData.petLevel, petData.totalXp)} 
+                    alt={getPetName(petData.petLevel)} 
+                  />
+                  <div className="pet-shadow"></div>
                   {showLevelUpBadge && <div className="level-up-text">LEVEL UP! 🎉</div>}
                 </div>
                 
-                <h3 style={{ margin: '10px 0 5px', fontSize: '24px' }}>
-                  {petData.username}'s Programmer Pet {petData.isDemo && <span style={{ fontSize: '12px', background: 'var(--warning)', color: '#fff', padding: '2px 6px', borderRadius: '4px', verticalAlign: 'middle' }}>DEMO</span>}
+                <h3 style={{ margin: '15px 0 5px', fontSize: '24px' }}>
+                  {getPetName(petData.petLevel)} ({petData.username}) {petData.isDemo && <span style={{ fontSize: '12px', background: 'var(--warning)', color: '#fff', padding: '2px 6px', borderRadius: '4px', verticalAlign: 'middle' }}>DEMO</span>}
                 </h3>
                 
                 <p style={{ color: 'var(--text-secondary)', marginBottom: '15px' }}>

@@ -8,7 +8,8 @@ Esta aplicação foi desenvolvida com foco em **alta estética visual (glassmorp
 
 ## ✨ Funcionalidades
 
-- **Evolução Dinâmica**: Seu pet cresce e evolui através de 5 formas visuais diferentes (de 🐣 Ovo/Pinto até 🐉 Dragão Lendário) com base no nível global calculado a partir das suas estatísticas.
+- **Evolução Dinâmica (Pixel Art)**: Seu pet cresce e evolui através de 5 estágios com sprites de pixel art animados retrô (de **Pichu Programmer** até **Rayquaza CTO**) de acordo com o seu nível global no GitHub. Os sprites são renderizados com nitidez pixelada (`image-rendering: pixelated`) e contam com uma animação de flutuação e sombra dinâmica.
+- **Estágio Shiny (Brilhante)**: Se o seu XP total de programador for superior a 1000 XP, o seu pet se transforma em uma versão especial **Brilhante (Shiny)** com cores raras!
 - **Skills & XP por Linguagem**: A aplicação analisa seus repositórios públicos, identifica as linguagens que você utiliza e calcula níveis de proficiência (XP) individuais para cada uma.
 - **Conquistas Desbloqueáveis (Achievements)**: Uma aba dedicada lista conquistas automáticas (ex: "Poliglota", "Mestre dos Commits") que mudam visualmente de bloqueadas (cinza com cadeado 🔒) para desbloqueadas (coloridas e vibrantes ✨) conforme você atinge os marcos de desenvolvimento.
 - **Animações de Level Up**: Efeitos de bounce e brilho neon acompanhados de uma comemoração flutuante quando o pet sobe de nível.

@@ -24,17 +24,66 @@
   }
 }
 
-/* Pet Emoji animation container */
+/* Pet Pixel Art Sprite animation container */
 .pet-container {
-  display: inline-block;
-  font-size: 80px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   margin: 20px 0;
   position: relative;
   transition: transform 0.3s ease;
+  height: 120px;
+  width: 100%;
+}
+
+.pet-sprite {
+  height: 110px;
+  width: auto;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+  animation: float 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* Floating shadow below sprite */
+.pet-shadow {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  filter: blur(2px);
+  animation: shadowShrink 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes shadowShrink {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(-50%) scale(0.7);
+    opacity: 0.4;
+  }
 }
 
 .pet-container:hover {
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.08);
 }
 
 /* Level Up bounce keyframe */
